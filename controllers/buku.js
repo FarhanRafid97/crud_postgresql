@@ -47,4 +47,17 @@ const updateBuku = async (req, res) => {
   }
 };
 
-module.exports = { postBuku, getBuku, updateBuku };
+const deleteBuku = async (req, res) => {
+  const { id } = req.params;
+  try {
+    await data_buku.destroy({
+      where: {
+        id: id,
+      },
+    });
+    res.status(200).json({ msg: 'data bersahil di hapus' });
+  } catch (error) {
+    res.status(400).json({ msg: 'data gagal di hapus' });
+  }
+};
+module.exports = { postBuku, getBuku, deleteBuku, updateBuku };
